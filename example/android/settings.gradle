@@ -1,0 +1,47 @@
+/*
+ * Copyright (c) 田梓萱[小草林] 2021-2024.
+ * All Rights Reserved.
+ * All codes are protected by China's regulations on the protection of computer software, and infringement must be investigated.
+ * 版权所有 (c) 田梓萱[小草林] 2021-2024.
+ * 所有代码均受中国《计算机软件保护条例》保护，侵权必究.
+ */
+
+pluginManagement {
+    def flutterSdkPath = {
+        def properties = new Properties()
+        file("local.properties").withInputStream { properties.load(it) }
+        def flutterSdkPath = properties.getProperty("flutter.sdk")
+        assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
+        return flutterSdkPath
+    }
+    settings.ext.flutterSdkPath = flutterSdkPath()
+
+    includeBuild("${settings.ext.flutterSdkPath}/packages/flutter_tools/gradle")
+
+    repositories {
+        maven {
+            allowInsecureProtocol = true
+            url "http://download.flutter.io"
+        }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url "https://jitpack.io/"
+        }
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven {
+            url "https://repo1.maven.org/maven2/"
+        }
+    }
+}
+
+plugins {
+    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
+    id "com.android.application" version "8.4.2" apply false
+    id "org.jetbrains.kotlin.android" version "2.0.0" apply false
+}
+
+include ":app"

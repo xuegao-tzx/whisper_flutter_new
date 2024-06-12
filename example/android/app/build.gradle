@@ -1,0 +1,116 @@
+/*
+ * Copyright (c) 田梓萱[小草林] 2021-2024.
+ * All Rights Reserved.
+ * All codes are protected by China's regulations on the protection of computer software, and infringement must be investigated.
+ * 版权所有 (c) 田梓萱[小草林] 2021-2024.
+ * 所有代码均受中国《计算机软件保护条例》保护，侵权必究.
+ */
+
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+android {
+    namespace "com.example.whisper"
+    compileSdk 34//compileSdkVersion flutter.compileSdkVersion
+    ndkVersion "27.0.11902837"//ndkVersion flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
+        apiVersion = "2.1"
+        languageVersion = "2.1"
+        freeCompilerArgs = ["-progressive", "-Xjvm-default=all", "-Xjsr305=strict", "-Xno-call-assertions", "-Xno-param-assertions", "-Xno-receiver-assertions", "-Xskip-prerelease-check", "-Xallow-unstable-dependencies"]
+    }
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.example.whisper"
+        // You can update the following values to match your application needs.
+        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        minSdkVersion 23
+        ndk {
+            abiFilters "arm64-v8a", "armeabi-v7a", "x86_64"
+        }
+        multiDexEnabled true
+        targetSdkVersion 34//flutter.targetSdkVersion
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        externalNativeBuild {
+            cmake {
+                abiFilters "armeabi-v7a", "arm64-v8a", "x86_64"
+                cFlags "-O3 -s -flto=thin -ffunction-sections -fdata-sections -fvisibility=hidden -fvisibility-inlines-hidden"
+                cppFlags "-O3 -s -flto=thin -ffunction-sections -fdata-sections -fvisibility=hidden -fvisibility-inlines-hidden"
+                arguments "-Wl,--gc-sections,--exclude-libs,ALL", "-DANDROID_STL=c++_static", "-DCMAKE_BUILD_TYPE=Release"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    buildFeatures {
+        buildConfig true
+    }
+    packaging {
+        dex {
+            useLegacyPackaging true
+        }
+        jniLibs {
+            useLegacyPackaging true
+        }
+        resources {
+            resources.excludes += "META-INF/DEPENDENCIES"
+            resources.excludes += "META-INF/NOTICE"
+            resources.excludes += "META-INF/LICENSE"
+            resources.excludes += "META-INF/LICENSE.txt"
+            resources.excludes += "META-INF/NOTICE.txt"
+            resources.excludes += "META-INF/LICENSE.md"
+            resources.excludes += "META-INF/LICENSE-notice.md"
+            resources.excludes += "META-INF/{AL2.0,LGPL2.1,LICENSE,NOTICE,DEPENDENCIES}"
+            resources.excludes += "DebugProbesKt.bin"
+            resources.excludes += "META-INF/*.kotlin_module"
+            resources.excludes += "**/*.kotlin_module"
+            resources.excludes += "**/*.version"
+        }
+    }
+}
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation platform("org.jetbrains.kotlin:kotlin-bom:2.0.0")
+}

@@ -1,0 +1,61 @@
+/*
+ * Copyright (c) 田梓萱[小草林] 2021-2024.
+ * All Rights Reserved.
+ * All codes are protected by China's regulations on the protection of computer software, and infringement must be investigated.
+ * 版权所有 (c) 田梓萱[小草林] 2021-2024.
+ * 所有代码均受中国《计算机软件保护条例》保护，侵权必究.
+ */
+
+allprojects {
+    repositories {
+        maven {
+            allowInsecureProtocol = true
+            url "http://download.flutter.io"
+        }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url "https://jitpack.io/"
+        }
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven {
+            url "https://repo1.maven.org/maven2/"
+        }
+    }
+}
+rootProject.buildDir = '../build'
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+buildscript {
+    repositories {
+        maven {
+            allowInsecureProtocol = true
+            url "http://download.flutter.io"
+        }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url "https://jitpack.io/"
+        }
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+        maven {
+            url "https://repo1.maven.org/maven2/"
+        }
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:8.4.2"
+    }
+}
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "labels": [
+    "Robot/Dependencies",
+    "Status/Abandoned"
+  ],
+  "assignees": [
+    "zixuanxcl@gmail.com"
+  ],
+  "reviewers": [
+    "zixuanxcl@gmail.com"
+  ],
+  "branchConcurrentLimit": 0,
+  "dependencyDashboard": true,
+  "extends": [
+    "config:recommended"
+  ]
+}
