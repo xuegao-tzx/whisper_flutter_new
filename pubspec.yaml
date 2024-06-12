@@ -1,6 +1,8 @@
 name: whisper_flutter_new
 description: Use whisper.cpp models implementation for Android and iOS
 version: 1.0.1
+repository: https://github.com/xuegao-tzx/whisper_flutter_new
+issue_tracker: https://github.com/xuegao-tzx/whisper_flutter_new/issues
 homepage: https://pub.dev/packages/whisper_flutter_new
 
 platforms:

@@ -1,5 +1,7 @@
 # Whisper Flutter New
 
+[![pub package](https://img.shields.io/pub/v/whisper_flutter_new.svg?label=whisper_flutter_new&color=blue)](https://pub.dev/packages/whisper_flutter_new)
+
 Ready to use [whisper.cpp](https://github.com/ggerganov/whisper.cpp) models implementation for iOS
 and Android
 
