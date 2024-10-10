@@ -2,6 +2,10 @@
 
 [![pub package](https://img.shields.io/pub/v/whisper_flutter_new.svg?label=whisper_flutter_new&color=blue)](https://pub.dev/packages/whisper_flutter_new)
 
+# Important Notice:
+
+**I am currently refactoring the functionality and plan to provide flutter bindings for both llama.cpp and whisper.cpp. After the refactoring is complete, I will consider adapting to Windows and MacOS**
+
 Ready to use [whisper.cpp](https://github.com/ggerganov/whisper.cpp) models implementation for iOS
 and Android
 
