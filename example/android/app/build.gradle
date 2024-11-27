@@ -112,5 +112,5 @@ flutter {
 }
 
 dependencies {
-    implementation platform("org.jetbrains.kotlin:kotlin-bom:2.0.0")
+    implementation platform("org.jetbrains.kotlin:kotlin-bom:2.1.0")
 }
