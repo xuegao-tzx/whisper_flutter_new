@@ -79,8 +79,9 @@ Future<String> downloadModel(
 
   await for (var chunk in response) {
     raf.writeFromSync(chunk);
-    downloadedBytes += chunk.length;
+
     if (onProgress != null) {
+      downloadedBytes += chunk.length;
       onProgress(downloadedBytes, response.contentLength);
     }
   }

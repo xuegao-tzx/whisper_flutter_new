@@ -42,6 +42,7 @@ class Whisper {
   // override of model download host
   final String? downloadHost;
 
+  ///Callback to get model download progress
   final void Function(int progress, int totalLength)? onDownloadProgress;
 
   DynamicLibrary _openLib() {
