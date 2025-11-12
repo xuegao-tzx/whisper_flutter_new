@@ -27,7 +27,11 @@ class Whisper {
   /// [model] is required
   /// [modelDir] is path where downloaded model will be stored.
   /// Default to library directory
-  const Whisper({required this.model, this.modelDir, this.downloadHost});
+  const Whisper(
+      {required this.model,
+      this.modelDir,
+      this.downloadHost,
+      this.onDownloadProgress});
 
   /// model used for transcription
   final WhisperModel model;
@@ -37,6 +41,8 @@ class Whisper {
 
   // override of model download host
   final String? downloadHost;
+
+  final void Function(int progress, int totalLength)? onDownloadProgress;
 
   DynamicLibrary _openLib() {
     if (Platform.isAndroid) {
@@ -67,7 +73,10 @@ class Whisper {
       return;
     } else {
       await downloadModel(
-          model: model, destinationPath: modelDir, downloadHost: downloadHost);
+          model: model,
+          destinationPath: modelDir,
+          downloadHost: downloadHost,
+          onProgress: onDownloadProgress);
     }
   }
 

@@ -46,7 +46,8 @@ enum WhisperModel {
 Future<String> downloadModel(
     {required WhisperModel model,
     required String destinationPath,
-    String? downloadHost}) async {
+    String? downloadHost,
+    void Function(int progress, int totalLength)? onProgress}) async {
   if (kDebugMode) {
     debugPrint("Download model ${model.modelName}");
   }
@@ -74,8 +75,14 @@ Future<String> downloadModel(
   final file = File("$destinationPath/ggml-${model.modelName}.bin");
   final raf = file.openSync(mode: FileMode.write);
 
+  int downloadedBytes = 0;
+
   await for (var chunk in response) {
     raf.writeFromSync(chunk);
+    downloadedBytes += chunk.length;
+    if (onProgress != null) {
+      onProgress(downloadedBytes, response.contentLength);
+    }
   }
 
   await raf.close();
