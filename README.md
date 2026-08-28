@@ -1,3 +1,5 @@
+
+
 # Whisper Flutter New
 
 [![pub package](https://img.shields.io/pub/v/whisper_flutter_new.svg?label=whisper_flutter_new&color=blue)](https://pub.dev/packages/whisper_flutter_new)
@@ -66,3 +68,5 @@ final String transcription = await whisper.transcribe(
 );
 print(transcription);
 ```
+
+The WAV file must be 16 kHz, 16-bit, mono or stereo.
