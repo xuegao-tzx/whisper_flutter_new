@@ -42,7 +42,7 @@ dependencies:
   system_info2: ^4.0.0
   ffmpeg_kit_flutter_full_gpl: 6.0.3
   record: ^5.1.1
-  cupertino_icons: ^1.0.8
+  cupertino_icons: ^2.0.0
   whisper_flutter_new:
     path: ../
 
