@@ -1,11 +1,8 @@
-import "dart:io";
-
+import "dart:developer";
 import "package:flutter/foundation.dart";
 import "package:flutter_riverpod/flutter_riverpod.dart";
-import "package:path_provider/path_provider.dart";
 import "package:system_info2/system_info2.dart";
 import "package:test_whisper/providers.dart";
-import "package:test_whisper/whisper_audio_convert.dart";
 import "package:test_whisper/whisper_result.dart";
 import "package:whisper_flutter_new/whisper_flutter_new.dart";
 
@@ -22,9 +19,12 @@ class WhisperController extends StateNotifier<AsyncValue<TranscribeResult?>> {
     /// China: https://hf-mirror.com/ggerganov/whisper.cpp/resolve/main
     /// Other: https://huggingface.co/ggerganov/whisper.cpp/resolve/main
     final Whisper whisper = Whisper(
-        model: model,
-        downloadHost:
-            "https://huggingface.co/ggerganov/whisper.cpp/resolve/main");
+      model: model,
+      downloadHost: "https://huggingface.co/ggerganov/whisper.cpp/resolve/main",
+      onDownloadProgress: (progress, totalLength) {
+        log("Download progress: $progress / $totalLength");
+      },
+    );
 
     final DateTime start = DateTime.now();
 
@@ -51,17 +51,9 @@ class WhisperController extends StateNotifier<AsyncValue<TranscribeResult?>> {
         debugPrint("[Whisper]Number of core = ${cores}");
         debugPrint("[Whisper]Whisper version = $whisperVersion");
       }
-      final Directory documentDirectory =
-          await getApplicationDocumentsDirectory();
-      final WhisperAudioconvert converter = WhisperAudioconvert(
-        audioInput: File(filePath),
-        audioOutput: File("${documentDirectory.path}/convert.wav"),
-      );
-
-      final File? convertedFile = await converter.convert();
       final WhisperTranscribeResponse transcription = await whisper.transcribe(
         transcribeRequest: TranscribeRequest(
-          audio: convertedFile?.path ?? filePath,
+          audio: filePath,
           language: lang,
           nProcessors: (cores * 1.2).toInt(),
           threads: (cores * 1.2).toInt(),
