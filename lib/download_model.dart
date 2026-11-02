@@ -15,21 +15,41 @@ enum WhisperModel {
   // no model
   none(""),
 
-  /// tiny model for all languages
+  /// tiny models for all languages
   tiny("tiny"),
+  tinyQ5("tiny-q5_1"),
+  /// tiny models for English only
+  tinyEn("tiny.en"),
+  tinyEnQ5("tiny.en-q5_1"),
+  tinyEnQ8("tiny.en-q8_0"),
 
-  /// base model for all languages
+  /// base models for all languages
   base("base"),
+  baseQ5("base-q5_1"),
+  /// base models for English only
+  baseEn("base.en"),
+  baseEnQ5("base.en-q5_1"),
 
-  /// small model for all languages
+  /// small models for all languages
   small("small"),
+  smallQ5("small-q5_1"),
+  /// small models for English only
+  smallEn("small.en"),
+  smallEnQ5("small.en-q5_1"),
 
-  /// medium model for all languages
+  /// medium models for all languages
   medium("medium"),
+  mediumQ5("medium-q5_0"),
+  /// medium models for English only
+  mediumEn("medium.en"),
+  mediumEnQ5("medium.en-q5_0"),
 
-  /// large model for all languages
+  /// large models for all languages
   largeV1("large-v1"),
-  largeV2("large-v2");
+  largeV2("large-v2"),
+  largeV2Q5("large-v2-q5_0"),
+  largeV3("large-v3"),
+  largeV3Q5("large-v3-q5_0");
 
   const WhisperModel(this.modelName);
 
