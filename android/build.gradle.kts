@@ -16,7 +16,7 @@ buildscript {
 
     dependencies {
         // The Android Gradle Plugin knows how to build native code with the NDK.
-        classpath("com.android.tools.build:gradle:9.1.0")
+        classpath("com.android.tools.build:gradle:9.5.1")
     }
 }
 
